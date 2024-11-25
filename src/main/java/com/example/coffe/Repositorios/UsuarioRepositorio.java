@@ -24,4 +24,6 @@ public interface UsuarioRepositorio extends JpaRepository<Usuarios, Integer> {
     boolean existsByRol(Usuarios.Rol rol);
 
     Optional<Object> findByRol(Usuarios.Rol rol);
+
+    Optional<Usuarios> findByCorreo(String correo);
 }

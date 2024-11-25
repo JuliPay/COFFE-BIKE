@@ -8,17 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuariosServicio {
     private final UsuarioRepositorio usuariosRepositorio;
 
-    // Contraseña del jefe
-    private static final String CONTRASEÑA_JEFE = "jefe123";
 
-    public UsuariosServicio(UsuarioRepositorio usuariosRepository) {
+
+    public UsuariosServicio(UsuarioRepositorio usuariosRepository ) {
         this.usuariosRepositorio = usuariosRepository;
+
     }
 
     public List<Usuarios> obtenerTodos() {
@@ -61,7 +60,8 @@ public class UsuariosServicio {
         usuario.setRol(usuarioDTO.getRol());
         usuario.setSubrol(usuarioDTO.getSubrol());
         usuario.setCorreo(usuarioDTO.getCorreo());
-        usuario.setContraseña(usuarioDTO.getContraseña());
+        usuario.setContraseña(usuarioDTO.getContraseña());;
+
         return usuariosRepositorio.save(usuario);
     }
 
@@ -116,4 +116,7 @@ public class UsuariosServicio {
         // Eliminar el usuario
         usuariosRepositorio.delete(usuarioAEliminar);
     }
+
+
+
 }
