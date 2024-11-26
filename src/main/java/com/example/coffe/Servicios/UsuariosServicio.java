@@ -117,6 +117,19 @@ public class UsuariosServicio {
         usuariosRepositorio.delete(usuarioAEliminar);
     }
 
+    //metodo para autenticar el usuario
+    public Usuarios autenticarUsuario(String nombre, String contraseña) {
+        Usuarios usuario = usuariosRepositorio.findByNombre(nombre)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        // Verificar que la contraseña coincida
+        if (!usuario.getContraseña().equals(contraseña)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Contraseña incorrecta");
+        }
+
+        return usuario; // Devuelve el usuario autenticado si las credenciales son correctas
+    }
+
 
 
 }

@@ -1,9 +1,11 @@
 package com.example.coffe.Controladores;
 
 import com.example.coffe.DTO.EliminarUsuarioDTO;
+import com.example.coffe.DTO.LoginDTO;
 import com.example.coffe.DTO.UsuarioDTO;
 import com.example.coffe.Entidades.Usuarios;
 import com.example.coffe.Servicios.UsuariosServicio;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +50,16 @@ public class UsuariosControlador {
                 eliminarUsuarioDTO.getNombreUsuarioAEliminar(),
                 eliminarUsuarioDTO.getContraseñaJefe()
         );
+    }
+
+
+    // Endpoint para el login
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDTO login) {
+        Usuarios usuario = usuariosServicio.autenticarUsuario(login.getNombre(), login.getContraseña());
+
+        // Devuelve el nombre y rol del usuario autenticado
+        return ResponseEntity.ok("Bienvenido " + usuario.getNombre() + ". Tu rol es: " + usuario.getRol());
     }
 
     
