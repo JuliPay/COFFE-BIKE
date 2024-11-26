@@ -1,39 +1,19 @@
-package com.example.coffe.Entidades;
+package com.example.coffe.DTO;
 
-import jakarta.persistence.*;
+import com.example.coffe.Entidades.Productos;
 
-import java.util.List;
-
-@Entity
-@Table(name = "MateriaPrima")
-public class MateriaPrima {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(nullable = false,  unique = true, length = 100)
+public class MateriaPrimaDTO {
+    private int id;
     private String nombre;
-
-    @Column(nullable = false, length = 50)
     private String unidadMedida;
-
-    @Column(nullable = false )
     private Integer stockActual;
-
-    @Column(nullable = false)
     private Integer precioUnitario;
 
-    @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Receta> recetas;
-
-    @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MovimientosMateriasPrima> movimientos;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

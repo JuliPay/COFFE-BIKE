@@ -1,7 +1,6 @@
 package com.example.coffe.DTO;
 
 import com.example.coffe.Entidades.Productos;
-import com.example.coffe.Entidades.Usuarios;
 
 public class ProductoDTO {
     private int id;
