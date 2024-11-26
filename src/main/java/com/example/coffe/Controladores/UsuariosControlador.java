@@ -58,6 +58,7 @@ public class UsuariosControlador {
     public ResponseEntity<String> login(@RequestBody LoginDTO login) {
         Usuarios usuario = usuariosServicio.autenticarUsuario(login.getNombre(), login.getContraseña());
 
+
         // Devuelve el nombre y rol del usuario autenticado
         return ResponseEntity.ok("Bienvenido " + usuario.getNombre() + ". Tu rol es: " + usuario.getRol());
     }
