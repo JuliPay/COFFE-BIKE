@@ -9,6 +9,7 @@ public class UsuarioDTO {
     private Usuarios.SubRol subrol;
     private String correo;
     private String contraseña;
+    private String rutaImagen;
 
     public int getDocumento() {
         return Documento;
@@ -57,5 +58,13 @@ public class UsuarioDTO {
 
     public void setSubrol(Usuarios.SubRol subrol) {
         this.subrol = subrol;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 }

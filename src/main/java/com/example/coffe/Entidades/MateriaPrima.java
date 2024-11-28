@@ -26,8 +26,6 @@ public class MateriaPrima {
     @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Receta> recetas;
 
-    @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MovimientosMateriasPrima> movimientos;
 
     public Integer getId() {
         return id;

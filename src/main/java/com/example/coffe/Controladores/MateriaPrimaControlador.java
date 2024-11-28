@@ -13,11 +13,10 @@ public class MateriaPrimaControlador {
     private final MateriaPrimaServicio materiaServicio;
 
     public MateriaPrimaControlador(MateriaPrimaServicio materiaServicio) {
-
         this.materiaServicio = materiaServicio;
     }
 
-    // Obtener todos los productos
+    // Obtener todos los matrias primas
     @GetMapping
     public List<MateriaPrima> obtenerTodos() {
         return materiaServicio .obtenerTodos();

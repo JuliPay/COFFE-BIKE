@@ -33,18 +33,18 @@ public class ProductosControlador {
 
     // Agregar un nuevo producto
     @PostMapping
-    public Productos agregarUsuario(@RequestBody ProductoDTO productosDTO) {
+    public Productos agregarProducto(@RequestBody ProductoDTO productosDTO) {
         return productosServicio.agregarProducto(productosDTO);
     }
 
     // Actualizar un producto por ID
     @PutMapping("/{id}")
-    public Productos actualizarUsuario(@PathVariable Integer id, @RequestBody ProductoDTO productosDTO) {
+    public Productos actualizarProducto(@PathVariable Integer id, @RequestBody ProductoDTO productosDTO) {
         return productosServicio.actualizarProducto(id, productosDTO);
     }
 
     @DeleteMapping("/eliminar")
-    public void eliminarUsuario(@RequestBody EliminarProductoDTO eliminarProductoDTO) {
+    public void eliminarProducto(@RequestBody EliminarProductoDTO eliminarProductoDTO) {
         productosServicio.eliminarProductoPorId(
                 eliminarProductoDTO.getIdproductoaEliminar(),
                 eliminarProductoDTO.getContraseñaJefe()

@@ -18,6 +18,9 @@ public class Productos {
     @Column(nullable = false, unique = true, length = 200)
     private String descripcion;
 
+    @Column(nullable = false)
+    private Integer  cantidad;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Categoria categoria;
@@ -35,6 +38,7 @@ public class Productos {
     public enum Categoria {
         PLATO, BEBIDA
     }
+
 
     public Productos() {
 
@@ -64,6 +68,14 @@ public class Productos {
         this.descripcion = descripcion;
     }
 
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }
@@ -87,4 +99,6 @@ public class Productos {
     public void setId_usuario(Usuarios id_usuario) {
         this.id_usuario = id_usuario;
     }
+
+
 }

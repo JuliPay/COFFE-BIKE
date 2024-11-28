@@ -5,6 +5,7 @@ import com.example.coffe.Entidades.Productos;
 import com.example.coffe.Entidades.Usuarios;
 import com.example.coffe.Repositorios.ProductoRepositorio;
 import com.example.coffe.Repositorios.UsuarioRepositorio;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class ProductosServicio {
         Productos producto = new Productos();
         producto.setNombre(productoDTO.getNombre());
         producto.setDescripcion(productoDTO.getDescripcion());
+        producto.setCantidad(productoDTO.getCantidad());
         producto.setCategoria(productoDTO.getCategoria());
         producto.setPrecioUnitario(productoDTO.getPrecioUnitario());
         // Buscar el usuario por ID
@@ -49,6 +51,7 @@ public class ProductosServicio {
         return productosRepositorio.findById(id).map(p -> {
             p.setNombre(productoDTO.getNombre());
             p.setDescripcion(productoDTO.getDescripcion());
+            p.setCantidad(productoDTO.getCantidad());
             p.setCategoria(productoDTO.getCategoria());
             p.setPrecioUnitario(productoDTO.getPrecioUnitario());
             // Buscar el usuario por ID
@@ -70,7 +73,7 @@ public class ProductosServicio {
             throw new RuntimeException("Acceso denegado: Solo el jefe puede eliminar usuarios.");
         }
 
-        // Buscar al usuario que se quiere eliminar
+        // Buscar al producto que se quiere eliminar
         Productos productoAEliminar = productosRepositorio.findById(idProductoaEliminar)
                 .orElseThrow(() -> new RuntimeException("No se encontró un producto con el id especificado."));
         // Eliminar el usuario

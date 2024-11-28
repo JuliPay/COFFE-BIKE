@@ -38,6 +38,9 @@ public class Usuarios {
         COSINERO, MESERO
     }
 
+    @Column(nullable = true, length = 255)
+    private String rutaImagen; // Ruta o URL de la imagen del usuario
+
     public Integer getDocumento() {
         return documento;
     }
@@ -85,5 +88,13 @@ public class Usuarios {
 
     public void setSubrol(SubRol subrol) {
         Subrol = subrol;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
     }
 }

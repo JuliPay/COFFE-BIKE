@@ -1,27 +1,12 @@
-package com.example.coffe.Entidades;
-
-import jakarta.persistence.*;
+package com.example.coffe.DTO;
 
 
-@Entity
-@Table(name = "Recetas")
-public class Receta {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+public class RecetaDTO {
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false)
-    private Productos producto;
-
-    @ManyToOne
-    @JoinColumn(name = "materiaprima_id", nullable = false)
-    private MateriaPrima materiaPrima;
-
-    @Column(nullable = false)
+    private Integer producto;
+    private Integer materiaPrima;
     private Integer cantidadNecesaria;
-
-    @Column(nullable = false, length = 250)
     private String procesoReceta;
 
     public Integer getId() {
@@ -32,19 +17,19 @@ public class Receta {
         this.id = id;
     }
 
-    public Productos getProducto() {
+    public Integer getProducto() {
         return producto;
     }
 
-    public void setProducto(Productos producto) {
+    public void setProducto(Integer producto) {
         this.producto = producto;
     }
 
-    public MateriaPrima getMateriaPrima() {
+    public Integer getMateriaPrima() {
         return materiaPrima;
     }
 
-    public void setMateriaPrima(MateriaPrima materiaPrima) {
+    public void setMateriaPrima(Integer materiaPrima) {
         this.materiaPrima = materiaPrima;
     }
 

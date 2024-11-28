@@ -5,13 +5,21 @@ import com.example.coffe.Entidades.Usuarios;
 import com.example.coffe.Repositorios.UsuarioRepositorio;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
 public class UsuariosServicio {
     private final UsuarioRepositorio usuariosRepositorio;
+
+    private static final String IMAGE_DIRECTORY = "uploads";
 
     public UsuariosServicio(UsuarioRepositorio usuariosRepository) {
         this.usuariosRepositorio = usuariosRepository;
@@ -59,7 +67,7 @@ public class UsuariosServicio {
         usuario.setSubrol(usuarioDTO.getSubrol());
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setContraseña(usuarioDTO.getContraseña());;
-
+        usuario.setRutaImagen(usuarioDTO.getRutaImagen());
         return usuariosRepositorio.save(usuario);
     }
 
@@ -127,6 +135,40 @@ public class UsuariosServicio {
 
         return usuario; // Devuelve el usuario autenticado si las credenciales son correctas
     }
+
+    //Subir imagen
+    public String guardarImagenUsuario(Integer idUsuario, MultipartFile file) {
+        Usuarios usuario = usuariosRepositorio.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con el ID: " + idUsuario));
+
+        try {
+            // Crear el directorio de imágenes si no existe
+            File directory = new File(IMAGE_DIRECTORY);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            // Guardar la imagen
+            String filename = idUsuario + "_" + file.getOriginalFilename();
+            Path filePath = Paths.get(IMAGE_DIRECTORY, filename);
+            Files.write(filePath, file.getBytes());
+
+            // Actualizar la ruta de la imagen en el usuario
+            usuario.setRutaImagen("/api/usuarios/imagenes/" + filename);
+            usuariosRepositorio.save(usuario);
+
+            return usuario.getRutaImagen();
+        } catch (IOException e) {
+            throw new RuntimeException("Error al guardar la imagen: " + e.getMessage(), e);
+        }
+    }
+
+    public byte[] obtenerImagen(String nombreArchivo) throws IOException {
+        Path filePath = Paths.get(IMAGE_DIRECTORY, nombreArchivo);
+        return Files.readAllBytes(filePath);
+    }
+
+
 
 
 

@@ -4,10 +4,17 @@ import com.example.coffe.DTO.EliminarUsuarioDTO;
 import com.example.coffe.DTO.LoginDTO;
 import com.example.coffe.DTO.UsuarioDTO;
 import com.example.coffe.Entidades.Usuarios;
+import com.example.coffe.Repositorios.UsuarioRepositorio;
 import com.example.coffe.Servicios.UsuariosServicio;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -15,9 +22,11 @@ import java.util.List;
 public class UsuariosControlador {
 
     private final UsuariosServicio usuariosServicio;
+    private final UsuarioRepositorio usuarioRepositorio;
 
-    public UsuariosControlador(UsuariosServicio usuariosService) {
+    public UsuariosControlador(UsuariosServicio usuariosService, UsuarioRepositorio usuarioRepositorio) {
         this.usuariosServicio = usuariosService;
+        this.usuarioRepositorio = usuarioRepositorio;
     }
 
     // Obtener todos los usuarios
@@ -62,5 +71,22 @@ public class UsuariosControlador {
         return ResponseEntity.ok("Bienvenido " + usuario.getNombre() + ". Tu rol es: " + usuario.getRol());
     }
 
+    // Subir una imagen asociada a un usuario
+    @PostMapping("/{id}/imagen")
+    public ResponseEntity<String> subirImagen(@PathVariable Integer id, @RequestParam("file") MultipartFile file) {
+        String rutaImagen = usuariosServicio.guardarImagenUsuario(id, file);
+        return ResponseEntity.ok(rutaImagen);
+    }
+
+    // Obtener la imagen de un usuario
+    @GetMapping("/imagenes/{nombreArchivo}")
+    public ResponseEntity<byte[]> obtenerImagen(@PathVariable String nombreArchivo) {
+        try {
+            byte[] imageBytes = usuariosServicio.obtenerImagen(nombreArchivo);
+            return ResponseEntity.ok().body(imageBytes);
+        } catch (IOException e) {
+            return ResponseEntity.status(404).build();
+        }
+    }
     
 }
