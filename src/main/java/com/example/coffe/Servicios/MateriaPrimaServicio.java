@@ -5,6 +5,7 @@ import com.example.coffe.Entidades.MateriaPrima;
 import com.example.coffe.Repositorios.MateriaPrimaRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -30,7 +31,7 @@ public class MateriaPrimaServicio {
         MateriaPrima materia = new MateriaPrima();
         materia.setNombre(materiaDTO.getNombre());
         materia.setUnidadMedida(materiaDTO.getUnidadMedida());
-        materia.setStockActual(materiaDTO.getStockActual());
+        materia.setCantidadDeUnidades(materiaDTO.getCantidadDeUnidades());
         materia.setPrecioUnitario(materiaDTO.getPrecioUnitario());
 
         return materiaRepositorio.save(materia);
@@ -42,7 +43,7 @@ public class MateriaPrimaServicio {
         return materiaRepositorio.findById(id).map(m -> {
             m.setNombre(materiaDTO.getNombre());
             m.setUnidadMedida(materiaDTO.getUnidadMedida());
-            m.setStockActual(materiaDTO.getStockActual());
+            m.setCantidadDeUnidades(materiaDTO.getCantidadDeUnidades());
             m.setPrecioUnitario(materiaDTO.getPrecioUnitario());
             return materiaRepositorio.save(m);
         }).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

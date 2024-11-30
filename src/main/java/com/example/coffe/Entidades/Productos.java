@@ -35,13 +35,23 @@ public class Productos {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Receta> recetas;
 
+    public boolean getStock() {
+        return false;
+    }
+
+
     public enum Categoria {
         PLATO, BEBIDA
     }
 
+    public Productos() {}
 
-    public Productos() {
-
+    public Productos(String nombre, String descripcion, Integer cantidad, Categoria categoria, Integer  precioUnitario) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.categoria = categoria;
+        this.precioUnitario = precioUnitario;
     }
 
     public Integer getId() {

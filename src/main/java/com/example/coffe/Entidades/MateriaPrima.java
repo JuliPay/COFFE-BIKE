@@ -2,29 +2,40 @@ package com.example.coffe.Entidades;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "MateriaPrima")
+@Table(name = "Materia_Prima")
 public class MateriaPrima {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false,  unique = true, length = 100)
+    @Column(name = "nombre", nullable = false,  unique = true, length = 100)
     private String nombre;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "unidad_medida",nullable = false, length = 50)
     private String unidadMedida;
 
-    @Column(nullable = false )
-    private Integer stockActual;
 
-    @Column(nullable = false)
+    @Column(name = "cantidad_de_unidades",nullable = false, precision = 10, scale = 2)
+    private BigDecimal cantidadDeUnidades;
+
+
+    @Column(name = "precio_unitario",nullable = false)
     private Integer precioUnitario;
 
-    @OneToMany(mappedBy = "materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Receta> recetas;
+
+    public MateriaPrima(){}
+
+    public MateriaPrima(String nombre, String unidadMedida, BigDecimal cantidadDeUnidades, Integer precioUnitario) {
+        this.nombre = nombre;
+        this.unidadMedida = unidadMedida;
+        this.cantidadDeUnidades = cantidadDeUnidades;
+        this.precioUnitario = precioUnitario;
+
+    }
+
 
 
     public Integer getId() {
@@ -51,12 +62,12 @@ public class MateriaPrima {
         this.unidadMedida = unidadMedida;
     }
 
-    public Integer getStockActual() {
-        return stockActual;
+    public BigDecimal getCantidadDeUnidades() {
+        return cantidadDeUnidades;
     }
 
-    public void setStockActual(Integer stockActual) {
-        this.stockActual = stockActual;
+    public void setCantidadDeUnidades(BigDecimal cantidadDeUnidades) {
+        this.cantidadDeUnidades = cantidadDeUnidades;
     }
 
     public Integer getPrecioUnitario() {

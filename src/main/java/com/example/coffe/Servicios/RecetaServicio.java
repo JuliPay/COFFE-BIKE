@@ -1,7 +1,6 @@
 package com.example.coffe.Servicios;
 
 import com.example.coffe.DTO.RecetaDTO;
-import com.example.coffe.Entidades.MateriaPrima;
 import com.example.coffe.Entidades.Productos;
 import com.example.coffe.Entidades.Receta;
 import com.example.coffe.Repositorios.MateriaPrimaRepositorio;
@@ -47,14 +46,6 @@ public class RecetaServicio {
 
         receta.setProducto(producto); // Asignar el producto encontrado
 
-
-        // Buscar el materia prima por ID
-        MateriaPrima materiaPrima = materiaRepositorio.findById(recetaDTO.getMateriaPrima())
-                .orElseThrow(() -> new RuntimeException("Materia Prima no encontrada con el ID: " + recetaDTO.getMateriaPrima()));
-
-        receta.setMateriaPrima(materiaPrima);// Asignar la materia prima encontrado
-
-        receta.setCantidadNecesaria(recetaDTO.getCantidadNecesaria());
         receta.setProcesoReceta(recetaDTO.getProcesoReceta());
 
         return recetaRepositorio.save(receta);
@@ -71,13 +62,6 @@ public class RecetaServicio {
             r.setProducto(producto); // Asignar el producto encontrado
 
 
-            // Buscar el materia prima por ID
-            MateriaPrima materiaPrima = materiaRepositorio.findById(recetaDTO.getMateriaPrima())
-                    .orElseThrow(() -> new RuntimeException("Materia Prima no encontrada con el ID: " + recetaDTO.getMateriaPrima()));
-
-            r.setMateriaPrima(materiaPrima);// Asignar la materia prima encontrado
-
-            r.setCantidadNecesaria(recetaDTO.getCantidadNecesaria());
             r.setProcesoReceta(recetaDTO.getProcesoReceta());
             return recetaRepositorio.save(r);
         }).orElseThrow(() -> new RuntimeException("Receta no encontrada con ID: " + id));
@@ -87,7 +71,7 @@ public class RecetaServicio {
         if (!recetaRepositorio.existsById(id)) {
             throw new RuntimeException("Receta no encontrada con el ID: " + id);
         }
-        materiaRepositorio.deleteById(id);
+        recetaRepositorio.deleteById(id);
     }
 
 }

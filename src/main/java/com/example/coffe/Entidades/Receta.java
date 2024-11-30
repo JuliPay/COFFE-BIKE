@@ -2,6 +2,9 @@ package com.example.coffe.Entidades;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "Recetas")
@@ -14,15 +17,21 @@ public class Receta {
     @JoinColumn(name = "producto_id", nullable = false)
     private Productos producto;
 
-    @ManyToOne
-    @JoinColumn(name = "materiaprima_id", nullable = false)
-    private MateriaPrima materiaPrima;
-
-    @Column(nullable = false)
-    private Integer cantidadNecesaria;
-
     @Column(nullable = false, length = 250)
     private String procesoReceta;
+
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MateriaPrimaRecetas> ingredientes = new ArrayList<>();
+
+    public Receta(){
+    }
+
+    public Receta(Productos producto, String procesoReceta) {
+        this.producto = producto;
+        this.procesoReceta = procesoReceta;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -32,28 +41,13 @@ public class Receta {
         this.id = id;
     }
 
+
     public Productos getProducto() {
         return producto;
     }
 
     public void setProducto(Productos producto) {
         this.producto = producto;
-    }
-
-    public MateriaPrima getMateriaPrima() {
-        return materiaPrima;
-    }
-
-    public void setMateriaPrima(MateriaPrima materiaPrima) {
-        this.materiaPrima = materiaPrima;
-    }
-
-    public Integer getCantidadNecesaria() {
-        return cantidadNecesaria;
-    }
-
-    public void setCantidadNecesaria(Integer cantidadNecesaria) {
-        this.cantidadNecesaria = cantidadNecesaria;
     }
 
     public String getProcesoReceta() {
@@ -63,4 +57,12 @@ public class Receta {
     public void setProcesoReceta(String procesoReceta) {
         this.procesoReceta = procesoReceta;
     }
+
+
+    public MateriaPrimaRecetas[] getIngredientes() {
+
+        return new MateriaPrimaRecetas[0];
+    }
+
+
 }

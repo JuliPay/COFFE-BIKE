@@ -1,12 +1,19 @@
 package com.example.coffe.DTO;
 
 import com.example.coffe.Entidades.Productos;
+import io.micrometer.common.lang.NonNull;
+import io.micrometer.common.lang.Nullable;
+import org.antlr.v4.runtime.misc.NotNull;
+
+import java.math.BigDecimal;
 
 public class MateriaPrimaDTO {
     private int id;
     private String nombre;
     private String unidadMedida;
-    private Integer stockActual;
+
+    private BigDecimal cantidadDeUnidades;
+
     private Integer precioUnitario;
 
     public int getId() {
@@ -33,12 +40,12 @@ public class MateriaPrimaDTO {
         this.unidadMedida = unidadMedida;
     }
 
-    public Integer getStockActual() {
-        return stockActual;
+    public BigDecimal getCantidadDeUnidades() {
+        return cantidadDeUnidades;
     }
 
-    public void setStockActual(Integer stockActual) {
-        this.stockActual = stockActual;
+    public void setCantidadDeUnidades(BigDecimal cantidadDeUnidades) {
+        this.cantidadDeUnidades = cantidadDeUnidades;
     }
 
     public Integer getPrecioUnitario() {
