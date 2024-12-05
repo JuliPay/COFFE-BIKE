@@ -29,9 +29,8 @@ public class Receta {
     public Receta(Productos producto, String procesoReceta) {
         this.producto = producto;
         this.procesoReceta = procesoReceta;
+
     }
-
-
 
     public Integer getId() {
         return id;
@@ -40,7 +39,6 @@ public class Receta {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Productos getProducto() {
         return producto;
@@ -58,11 +56,11 @@ public class Receta {
         this.procesoReceta = procesoReceta;
     }
 
-
-    public MateriaPrimaRecetas[] getIngredientes() {
-
-        return new MateriaPrimaRecetas[0];
+    public List<MateriaPrimaRecetas> getMateriaPrimaRecetas() {
+        return ingredientes;
     }
 
-
+    public void setIngredientes(List<MateriaPrimaRecetas> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
 }

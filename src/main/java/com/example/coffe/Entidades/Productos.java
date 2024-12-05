@@ -2,6 +2,7 @@ package com.example.coffe.Entidades;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class Productos {
     private Categoria categoria;
 
     @Column(nullable = false)
-    private Integer  precioUnitario;
+    private BigDecimal precioUnitario;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -35,10 +36,6 @@ public class Productos {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Receta> recetas;
 
-    public boolean getStock() {
-        return false;
-    }
-
 
     public enum Categoria {
         PLATO, BEBIDA
@@ -46,7 +43,7 @@ public class Productos {
 
     public Productos() {}
 
-    public Productos(String nombre, String descripcion, Integer cantidad, Categoria categoria, Integer  precioUnitario) {
+    public Productos(String nombre, String descripcion, Integer cantidad, Categoria categoria, BigDecimal  precioUnitario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
@@ -94,11 +91,11 @@ public class Productos {
         this.categoria = categoria;
     }
 
-    public Integer getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(Integer precioUnitario) {
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 

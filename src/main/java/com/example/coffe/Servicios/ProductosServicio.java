@@ -5,7 +5,6 @@ import com.example.coffe.Entidades.Productos;
 import com.example.coffe.Entidades.Usuarios;
 import com.example.coffe.Repositorios.ProductoRepositorio;
 import com.example.coffe.Repositorios.UsuarioRepositorio;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

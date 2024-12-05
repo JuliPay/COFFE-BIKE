@@ -22,6 +22,8 @@ public class MateriaPrimaRecetas {
     @Column(nullable = false)
     private BigDecimal cantidadIngrediente;
 
+    public MateriaPrimaRecetas(){}
+
     public MateriaPrimaRecetas(Receta receta, MateriaPrima materiaPrima, BigDecimal cantidadIngrediente) {
         this.receta = receta;
         this.materiaPrima = materiaPrima;

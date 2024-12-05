@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Facturas")
@@ -13,59 +14,46 @@ public class Factura {
     private Integer id;
 
     @Column(nullable = false)
-    private LocalDateTime fecha;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false)
-    private Productos producto;
+    private LocalDateTime fechaCompra;
 
     @Column(nullable = false)
-    private Integer cantidad;
+    private BigDecimal precioTotal;
 
-    @Column(nullable = false)
-    private BigDecimal total;
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
+    private List<DetalleFactura> detallesFactura;
 
     public Factura(){
 
     }
 
-    public Factura(LocalDateTime fecha, Productos producto, Integer cantidad, BigDecimal total) {
-        this.fecha = fecha;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.total = total;
+    public Factura(LocalDateTime fechaCompra, BigDecimal precioTotal, List<DetalleFactura> detallesFactura) {
+        this.fechaCompra = fechaCompra;
+        this.precioTotal = precioTotal;
+        this.detallesFactura = detallesFactura;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getFechaCompra() {
+        return fechaCompra;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaCompra(LocalDateTime fechaCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
-    public Productos getProducto() {
-        return producto;
+    public BigDecimal getPrecioTotal() {
+        return precioTotal;
     }
 
-    public void setProducto(Productos producto) {
-        this.producto = producto;
+    public void setPrecioTotal(BigDecimal precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public List<DetalleFactura> getDetallesFactura() {
+        return detallesFactura;
     }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setDetallesFactura(List<DetalleFactura> detallesFactura) {
+        this.detallesFactura = detallesFactura;
     }
 }
 

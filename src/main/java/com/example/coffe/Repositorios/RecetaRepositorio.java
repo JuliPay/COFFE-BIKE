@@ -18,5 +18,5 @@ public interface RecetaRepositorio extends JpaRepository<Receta, Integer> {
 
     void delete(Receta recetasAEliminar);
 
-    List<Receta> findByProductoId(Integer productoId);
+    Optional<Receta> findByProducto_Id(Integer productoId);
 }

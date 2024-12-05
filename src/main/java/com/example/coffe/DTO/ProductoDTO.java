@@ -2,13 +2,15 @@ package com.example.coffe.DTO;
 
 import com.example.coffe.Entidades.Productos;
 
+import java.math.BigDecimal;
+
 public class ProductoDTO {
     private int id;
     private String nombre;
     private String descripcion;
     private Integer cantidad;
     private Productos.Categoria categoria;
-    private Integer precioUnitario;
+    private BigDecimal precioUnitario;
     private Integer id_usuario;
 
     public int getId() {
@@ -51,14 +53,13 @@ public class ProductoDTO {
         this.categoria = categoria;
     }
 
-    public int getPrecioUnitario() {
+    public BigDecimal getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(int precioUnitario) {
+    public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
-
 
     public Integer getId_usuario() {
         return id_usuario;
